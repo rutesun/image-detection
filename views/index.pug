@@ -1,0 +1,18 @@
+html(lang=ko)
+
+  head
+    title= title
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', type='text/css' )
+    
+  body
+    h1= "Hello World"
+    block content
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+
+  block content
+    .sidebar
+      block sidebar
+        p nothing
+    .primary
+      block primary
+        p nothing
