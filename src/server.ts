@@ -5,35 +5,17 @@ import * as logger from "morgan";
 import * as path from "path";
 import * as errorHandler from "errorhandler";
 
-import { IndexRoute } from "./routes/index";
+import * as home from "./routes/index";
+import * as vision from "./controllers/vision";
 
-/**
- * The server.
- *
- * @class Server
- */
 export class Server {
 
   public app: express.Application;
 
-  /**
-   * Bootstrap the application.
-   *
-   * @class Server
-   * @method bootstrap
-   * @static
-   * @return {ng.auto.IInjectorService} Returns the newly created injector for this app.
-   */
   public static bootstrap(): Server {
     return new Server();
   }
 
-  /**
-   * Constructor.
-   *
-   * @class Server
-   * @constructor
-   */
   constructor() {
     //create expressjs application
     this.app = express();
@@ -48,22 +30,6 @@ export class Server {
     this.api();
   }
 
-  /**
-   * Create REST API routes
-   *
-   * @class Server
-   * @method api
-   */
-  public api() {
-    //empty for now
-  }
-
-  /**
-   * Configure application
-   *
-   * @class Server
-   * @method config
-   */
   public config() {
     //add static paths
     this.app.use(express.static(path.join(__dirname, "public")));
@@ -92,23 +58,26 @@ export class Server {
     //error handling
     this.app.use(errorHandler());
   }
+  private api() {
+    let router: express.Router;
+    router = express.Router();
 
-  /**
-   * Create and return Router.
-   *
-   * @class Server
-   * @method config
-   * @return void
-   */
+    //IndexRoute
+    let visionRouter = vision.create(router);
+
+    //use router middleware
+    this.app.use("/visions", visionRouter);
+  }
+
   private routes() {
     let router: express.Router;
     router = express.Router();
 
     //IndexRoute
-    IndexRoute.create(router);
+    let homeRouter = home.create(router);
 
     //use router middleware
-    this.app.use(router);
+    this.app.use("/", homeRouter);
   }
 
 }
