@@ -5,9 +5,14 @@
 var server = require("../dist/server");
 var debug = require("debug")("express:server");
 var http = require("http");
+var env = require('../dist/environment');
+console.log("env", env)
+
+//
+global.Promise = require('bluebird');
 
 //create http server
-var httpPort = normalizePort(process.env.PORT || 8080);
+var httpPort = normalizePort(env.getPort());
 var app = server.Server.bootstrap().app;
 app.set("port", httpPort);
 var httpServer = http.createServer(app);

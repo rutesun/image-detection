@@ -4,11 +4,12 @@ import * as async from "async";
 import * as request from "request";
 import { Response, Request, NextFunction, Router } from "express";
 
-import * as vision from "../libs/vision";
+import Vision from "../libs/vision";
 
 class VisionRouter {
+  private _vision = null;
   constructor() {
-
+    this._vision = new Vision();
   }
 
   /**
@@ -29,7 +30,7 @@ class VisionRouter {
    * @param next 
    */
   public async detect(req: Request, res: Response, next: NextFunction) {
-      let result = await vision.detect();
+      let result = await this._vision.detect();
   }
 }
 
