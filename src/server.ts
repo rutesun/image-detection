@@ -66,7 +66,7 @@ export class Server {
     let visionRouter = vision.create(router);
 
     //use router middleware
-    this.app.use("/visions", visionRouter);
+    this.app.use("/api/v1/visions", visionRouter);
   }
 
   private routes() {

@@ -1,0 +1,20 @@
+html(lang=ko)
+  head
+    title= title
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', type='text/css' )
+    
+  body
+    block content
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+
+  block content
+    div.container-fluid
+      div.row
+        div.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-1.main
+          div.sm-6
+            form.
+            <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+          div.sm-6
+            p="Hello"

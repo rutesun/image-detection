@@ -19,7 +19,8 @@ class Environment {
          }
          let _self = this;
          _self._port = process.env.PORT || 8080;  
-
+         _self._dbEndpoint = process.env.DB_ENDPOINT || "mongodb://localhost/vision";
+         
          Environment._instance = _self;
          
      }
@@ -45,4 +46,4 @@ class Environment {
      }
 }
 
-export = Environment.getInstance();
+export default Environment.getInstance();

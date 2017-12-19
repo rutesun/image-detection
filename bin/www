@@ -5,11 +5,21 @@
 var server = require("../dist/server");
 var debug = require("debug")("express:server");
 var http = require("http");
-var env = require('../dist/environment');
-console.log("env", env)
+var env = require('../dist/environment').default;
+var mongoose = require('mongoose');
 
-//
+console.debug(`Environment = ${env}`)
+
+// promise setting
 global.Promise = require('bluebird');
+
+// mongoose 
+mongoose.connect(env.getDbEndpoint(), { useMongoClient: true });
+mongoose.Promise = global.Promise;
+mongoose.connection.on("error", () => {
+  console.log("MongoDB connection error. Please make sure MongoDB is running.");
+  process.exit();
+});
 
 //create http server
 var httpPort = normalizePort(env.getPort());
@@ -83,3 +93,5 @@ function onListening() {
     : "port " + addr.port;
   debug("Listening on " + bind);
 }
+
+module.exports = app;
