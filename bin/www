@@ -8,7 +8,7 @@ var http = require("http");
 var env = require('../dist/environment').default;
 var mongoose = require('mongoose');
 
-console.debug(`Environment = ${env}`)
+console.debug(`Environment = ${JSON.stringify(env)}`)
 
 // promise setting
 global.Promise = require('bluebird');
