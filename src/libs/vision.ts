@@ -5,6 +5,8 @@ import * as request from "request";
 import environment from "../environment";
 import HttpClient from './httpClient';
 
+import { default as RequestModel } from '../models/request'
+
 export default class Vision {
   private _endpoint: string;
   private _apiKey: string;
@@ -19,34 +21,16 @@ export default class Vision {
     this._httpClient = new HttpClient();
   }
 
-  public async detectByUri(uri: string) {
+  public detectByUri(uris: string[], types: string[]) {
     let body = {
-      "requests": [
-        {
-          "image": {
-            "source": {
-              "imageUri": uri
-            }
-          },
-          "features": [
-            {
-              "type": "LABEL_DETECTION",
-              "maxResults": 20
-            }
-          ]
-        }
-      ]
-    }
+      "requests": uris.map((uri) => new RequestModel(uri, types, 10)),
+    };
     
-    try {
-      let res = await this._httpClient.post(`${this._endpoint}?key=${this._apiKey}`, body)
-      return res;
-    } catch (err) {
-      throw err;
-    }
+    console.debug(`Request body = ${body}`);   
+    return this._httpClient.post(`${this._endpoint}?key=${this._apiKey}`, body);
   }
 
-  public async detectByRaw(raw: any) {
+  public detectByRaw(raw: any) {
 
   }
 }

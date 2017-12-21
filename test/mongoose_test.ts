@@ -9,14 +9,15 @@ let dbEndpoint = env.getDbEndpoint();
 should();
 
 describe('mongodb test', () => {
-  beforeEach((done) => {
+  before((done) => {
     if (mongoose.connection.db) return done();
     try {
       mongoose.connect(dbEndpoint, { useMongoClient: true });
     } catch (e) {
       console.error(e);
+    } finally {
+      return done();
     }
-    done();
   });
 
   it("save", (done) => {
@@ -137,6 +138,12 @@ describe('mongodb test', () => {
         done();
     })
   })
+
+  after((done) => {
+    mongoose.disconnect(err => {
+      done(err);
+    })
+  });
 });
 
 
