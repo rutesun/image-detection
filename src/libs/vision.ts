@@ -29,9 +29,5 @@ export default class Vision {
     console.debug(`Request body = ${body}`);   
     return this._httpClient.post(`${this._endpoint}?key=${this._apiKey}`, body);
   }
-
-  public detectByRaw(raw: any) {
-
-  }
 }
 

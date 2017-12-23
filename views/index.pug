@@ -5,30 +5,59 @@ html(lang=ko)
     
   body
     block content
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
-
+   
   block content
     div.container-fluid
       div.row
-        block sidebar
         block main
-        
-        block sidebar
-          div.col-sm-3.col-md-2.sidebar
-            ul.nav.nav-sidebar
-              li
-                a(href="/") List
-              li
-                a(href="/vision") Image Detect
 
-        block main
-          div.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
-            hi.page-header="Dashboard"
-            p= title
-            div.table-responsive
-              div.table.table-striped
-                tbody
-                  tr
-                    td=1001
-                    td=Lorem
+
+block main
+  div.col-sm-9.col-sm-offset-2.col-md-10.col-md-offset-1.main
+    h1.page-header="Image Detect"
+    div
+      form(action="detect" method="post")
+        div.row
+          div.col-sm-4.col-md-4
+            Label Select image Type : 
+            select(id="detect_type" name="detect_type" class="form-control") 
+              option(value="LABEL_DETECTION") Label
+              option(value="FACE_DETECTION") Face
+          div.col-sm-4.col-md-8
+            div.input-group
+              <input type="text" id="image_uri" name="image_uri" class="form-control" required placeholder="Image Uri">
+              <span class="input-group-btn">
+                <button id="detect" class="btn btn-primary" type="submit">Detect</button>
+              </span>
+
+
+    h1.page-header="List"
+    div.table-responsive
+      table.table.table-striped
+        tbody
+          each row in list
+            tr
+              td.col-sm-4.col-md-4
+                img(class="thumbnail" src=row.url style="width: 100%;")
+              td.col-sm-7.col-md-8
+                each data in row.results
+                  p=JSON.stringify(data)
+
+
+mixin collapse(id, title, content)
+  div(class="panel-heading" role="tab")
+    h4.panel-title
+      <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        Collapsible Group Item #1
+      </a>
+  div(id=id class="panel-collapse collapse in" role="tabpanel")
+    div.panel-body
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+
+
+                      
+                  
+                  
         

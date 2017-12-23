@@ -1,9 +1,11 @@
 import * as mongoose from "mongoose";
 import env from '../environment';
-import VisionSchema from '../models/vision_schema'
+import VisionSchema from '../models/vision_schema';
+import Vision from '../libs/vision';
 
-export let detect = async (uris: string[], types: string[]) => {
-
+export let detect = async (uris: string, types: string) => {
+  let res = await new Vision().detectByUri([uris], [types]);
+  return res;
 }
 
 export let list = async (query: object) => {
