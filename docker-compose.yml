@@ -7,10 +7,10 @@ services:
       - "9000:8080"
     links:
       - mongo
-    restart: "always"
+    depends_on:
+      - mongo
     environment:
       - DB_ENDPOINT=mongodb://mongo/vision
-      
 
   mongo:
     container_name: mongo
@@ -19,7 +19,7 @@ services:
       - mongodbdata:/data/db 
     ports:
       - "27017:27017"
-    restart: "always"
+    # restart: "always"
     
 volumes:
   mongodbdata: 

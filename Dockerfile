@@ -4,17 +4,17 @@ EXPOSE 8080
 
 WORKDIR /home/app
 
-ADD package.json package-lock.json yarn.lock $WORKDIR/
+RUN npm install -g typescript
 
+ADD package.json package-lock.json yarn.lock ./
 RUN yarn install
-  
-ADD . $WORKDIR
 
-USER 0
-
+ADD . ./
 RUN \
-  chown -R node:node . 
+  tsc && \
+  yarn grunt
 
+RUN chown -R node:node dist bin 
 USER node
 ENTRYPOINT ["./docker-entrypoint.sh"]
 CMD [ "start" ]
