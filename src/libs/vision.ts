@@ -13,10 +13,8 @@ export default class Vision {
   private _httpClient: HttpClient;
 
   constructor() {
-    // this._endpoint = environment.getApiEndpoint();
-    // this._apiKey = environment.getApiKey();
-    this._endpoint = "https://vision.googleapis.com/v1/images:annotate"
-    this._apiKey = "AIzaSyCrjebqItVNaUp1d0Ai9eGVA6zMH8OH8r8"
+    this._endpoint = environment.getApiEndpoint();
+    this._apiKey = environment.getApiKey();
 
     this._httpClient = new HttpClient();
   }

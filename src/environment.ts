@@ -20,7 +20,9 @@ class Environment {
          let _self = this;
          _self._port = process.env.PORT || 8080;  
          _self._dbEndpoint = process.env.DB_ENDPOINT || "mongodb://localhost/vision";
-         
+         _self._apiEndpoint = process.env.API_ENDPOINT
+         _self._apiKey = process.env.API_KEY
+
          Environment._instance = _self;
          
      }
