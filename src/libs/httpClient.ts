@@ -10,7 +10,7 @@ export default class HttpClient {
     return request(_opt)
   }
 
-  public post(uri: string, body = {}, options = {}): Promise<any> {
+  public post(uri: string, body = {}, options = {}): PromiseLike<any> {
     let _opt = {
       method: 'POST',
       uri: uri,
