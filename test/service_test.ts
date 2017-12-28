@@ -1,7 +1,7 @@
 import { should, expect } from 'chai';
 import 'mocha';
 
-import { list } from '../src/service/image';
+import { detect, list } from '../src/service/image';
 
 import * as mongoose from "mongoose";
 import env from '../src/environment';
@@ -20,11 +20,19 @@ describe('service test', () => {
     }
   });
 
-  it('query', async () => {
+  it('detect', async () => {
+    let res = await detect('https://d3cbihxaqsuq0s.cloudfront.net/images/40583353_xl.jpg', 'LABEL_DETECTION')
+    expect(res).be.ok
+    console.info(res);
+    return; 
+  }).timeout(10 * 1000);
+
+  it('list', async () => {
       let res = await list({});
       expect(res).be.ok
+      console.log(res)
       return;
-  }).timeout(10 * 1000)
+  }).timeout(10 * 1000);
 
   after((done) => {
     mongoose.disconnect(err => {
