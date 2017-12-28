@@ -5,7 +5,7 @@ const _visionSchema = new mongoose.Schema({
   results: Array
 });
 
-let VisionSchema = null;
+let VisionSchema: mongoose.Model<mongoose.Document>  = null;
 try {
   VisionSchema = mongoose.model('Vision')
 } catch (error) {
