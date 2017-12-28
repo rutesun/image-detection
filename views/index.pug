@@ -42,8 +42,11 @@ block main
               td.col-sm-4.col-md-4
                 img(class="thumbnail" src=row.url style="width: 100%;")
               td.col-sm-7.col-md-8
-                each data in row.results
-                  p=JSON.stringify(data)
+                if row.results && Array.isArray(row.results)
+                  each data in row.results
+                    p=JSON.stringify(data)
+                else 
+                  p=JSON.stringify(row.results)
 
 
 mixin collapse(id, title, content)
